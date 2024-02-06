@@ -1,11 +1,9 @@
 'use client';
 import { useState } from 'react';
-import io from 'socket.io-client';
-import { useRouter } from 'next/navigation';
+import { redirect } from 'next/navigation';
 import { useUserStorage } from '@/storages/useUser';
 
-export default function Home() {
-   const router = useRouter();
+export default function Chat() {
    const [newRoomName, setNewRoomName] = useState('');
    const [rooms, setRooms] = useState(['default', 'room1', 'room2']);
    const {userName} = useUserStorage();
@@ -17,11 +15,11 @@ export default function Home() {
       }
    };
 
-   const handleRoomSelect = (roomName) => {
-      router.push(`/${roomName}`);
+   const handleRoomSelect = (roomName: string) => {
+      redirect(`/${roomName}`);
    };
 
-   if(!userName) router.push('/register');
+   if(!userName) redirect('/register');
 
    return (
       <div className="max-w-lg mx-auto p-6 bg-white rounded-lg shadow-md">

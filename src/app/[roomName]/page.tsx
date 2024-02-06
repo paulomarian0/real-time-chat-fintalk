@@ -2,7 +2,7 @@
 'use client';
 import { useUserStorage } from '@/storages/useUser';
 import { usePathname, useRouter } from 'next/navigation';
-import { useEffect, useState } from 'react';
+import { FormEvent, useEffect, useState } from 'react';
 import io from 'socket.io-client';
 
 export default function Room() {
@@ -10,11 +10,12 @@ export default function Room() {
    const router = useRouter();
    const roomName = pathName?.slice(1, pathName.length);
    const [message, setMessage] = useState('');
-   const [allMessages, setAllMessages] = useState([]);
+   const [allMessages, setAllMessages] = useState<{ userName: string, message: string }[]>([]);
    const { userName } = useUserStorage();
 
    useEffect(() => {
       const socket = io();
+
 
       const socketInitializer = async () => {
          await fetch('/api/socket');
@@ -32,7 +33,7 @@ export default function Room() {
       };
    }, [roomName]);
 
-   const handleSubmit = (e) => {
+   const handleSubmit = (e:FormEvent<HTMLFormElement>) => {
       e.preventDefault();
       const socket = io();
 
