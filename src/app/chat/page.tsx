@@ -1,12 +1,13 @@
 'use client';
 import { useState } from 'react';
-import { redirect } from 'next/navigation';
+import { useRouter, redirect } from 'next/navigation';
 import { useUserStorage } from '@/storages/useUser';
 
 export default function Chat() {
+   const router = useRouter();
    const [newRoomName, setNewRoomName] = useState('');
    const [rooms, setRooms] = useState(['default', 'room1', 'room2']);
-   const {userName} = useUserStorage();
+   const { userName } = useUserStorage();
 
    const handleCreateRoom = () => {
       if (newRoomName.trim() !== '' && !rooms.includes(newRoomName)) {
@@ -16,10 +17,11 @@ export default function Chat() {
    };
 
    const handleRoomSelect = (roomName: string) => {
-      redirect(`/${roomName}`);
+      console.log('roomName', roomName);
+      router.push(`/${roomName}`);
    };
 
-   if(!userName) redirect('/register');
+   if (!userName) redirect('/register');
 
    return (
       <div className="max-w-lg mx-auto p-6 bg-white rounded-lg shadow-md">
@@ -42,7 +44,7 @@ export default function Chat() {
                className="py-2 px-6 bg-blue-500 text-white rounded-md hover:bg-blue-600 focus:outline-none"
                onClick={handleCreateRoom}
             >
-          Create Room
+                                                  Create Room
             </button>
          </div>
          <div>

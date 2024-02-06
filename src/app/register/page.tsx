@@ -12,7 +12,7 @@ export default function Register() {
    const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
       e.preventDefault();
       setUserName(name);
-      router.push('/chat');
+      router.push('/chat'); 
    };
 
    return (

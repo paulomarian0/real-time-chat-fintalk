@@ -1,13 +1,13 @@
 // pages/rooms/[roomName].js
 'use client';
 import { useUserStorage } from '@/storages/useUser';
-import { usePathname, useRouter } from 'next/navigation';
+import { usePathname } from 'next/navigation';
 import { FormEvent, useEffect, useState } from 'react';
+import { redirect } from 'next/navigation';
 import io from 'socket.io-client';
 
 export default function Room() {
    const pathName = usePathname();
-   const router = useRouter();
    const roomName = pathName?.slice(1, pathName.length);
    const [message, setMessage] = useState('');
    const [allMessages, setAllMessages] = useState<{ userName: string, message: string }[]>([]);
@@ -45,7 +45,7 @@ export default function Room() {
       setMessage('');
    };
 
-   if(!userName) router.push('/register');
+   if(!userName) redirect('/register');
 
    return (
       <div className="max-w-lg mx-auto p-6 bg-white rounded-lg shadow-md">
