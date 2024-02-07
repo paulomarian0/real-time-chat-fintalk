@@ -13,6 +13,22 @@ export default function Room() {
    const [allMessages, setAllMessages] = useState<{ userName: string; message: string }[]>([]);
    const { userName } = useUserStorage();
 
+   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+      e.preventDefault();
+
+      if (!message) return;
+      const socket = io();
+
+      socket.emit('send-message', {
+         userName,
+         message,
+         room: roomName,
+      });
+      setMessage('');
+   };
+
+   if (!userName) redirect('/login');
+
    useEffect(() => {
       const socket = io();
 
@@ -26,43 +42,46 @@ export default function Room() {
       };
 
       socketInitializer();
-
       return () => {
          socket.disconnect();
       };
    }, [roomName]);
 
-   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
-      e.preventDefault();
-      const socket = io();
-
-      socket.emit('send-message', {
-         userName,
-         message,
-         room: roomName,
-      });
-      setMessage('');
-   };
-
-   if (!userName) redirect('/login');
+   useEffect(() => {
+      const scrollToBottom = () => {
+         const messageContainer = document.getElementById('message-container');
+         if (messageContainer) {
+            messageContainer.scrollTop = messageContainer.scrollHeight;
+         }
+      };
+      scrollToBottom();
+   }, [allMessages]);
 
    return (
       <div className="max-w-lg mx-auto p-6 bg-white rounded-lg shadow-md">
          <h1 className="text-2xl font-semibold mb-6">
-            <span className='capitalize'>{userName}</span>, você está na <span className='text-blue-600'>{roomName}</span>
+            <span className="capitalize">{userName}</span>, você está na <span className="text-blue-600">{roomName}</span>
          </h1>
-         <div className="max-h-80 overflow-y-auto mb-4">
-            {allMessages.map(({ userName, message }, index) => (
-               <div key={index} className="mb-2">
-                  <span className="font-semibold">{userName}:</span> <span>{message}</span>
+         <div id="message-container" className="max-h-80 overflow-y-auto mb-4 scroll-smooth">
+            {allMessages.map((item, index) => (
+               <div key={index} className={`mb-2 ${item.userName === userName ? 'text-right' : ''}`}>
+                  <div
+                     className={`inline-block rounded-lg px-4 py-2 ${item.userName === userName ? 'bg-green-500 text-white ' : 'bg-gray-200 text-black '}`}
+                  >
+                     <span className="font-semibold">
+                        {item.userName === userName ? 'Você:' : item.userName + ':'}
+                     </span>
+                     <span className="ml-1">{item.message}</span>
+                  </div>
                </div>
             ))}
          </div>
+
          <form onSubmit={handleSubmit} className="flex">
             <input
                className="flex-1 py-2 px-4 border border-gray-300 rounded-md mr-2 focus:outline-none"
                name="message"
-               placeholder="Enter your message"
+               placeholder="Escreva sua mensagem"
                value={message}
                onChange={(e) => setMessage(e.target.value)}
                autoComplete="off"
@@ -71,7 +90,7 @@ export default function Room() {
                type="submit"
                className="py-2 px-6 bg-blue-500 text-white rounded-md hover:bg-blue-600 focus:outline-none"
             >
-                                                  Send
+                                                  Enviar
             </button>
          </form>
       </div>
