@@ -3,6 +3,7 @@
 import { useRouter } from 'next/navigation';
 import { FormEvent, useState } from 'react';
 import { useUserStorage } from '@/storages/useUser';
+import Link from 'next/link';
 
 export default function Login() {
    const router = useRouter();
@@ -69,6 +70,21 @@ export default function Login() {
             >
                                                   Login
             </button>
+            <div className='flex gap-4 py-4'>
+               <Link
+                  href={{ pathname: '/register-anonymously' }}
+                  className="text-center w-full py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-gray-700 bg-gray-200 hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
+               >
+                                                            Enter Anonymously
+               </Link>
+
+               <Link
+                  href={{ pathname: '/chat' }}
+                  className="text-center w-full py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-400 hover:bg-blue-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
+               >
+                                                            Create Account
+               </Link>
+            </div>
          </form>
       </div>
    );

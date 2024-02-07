@@ -44,7 +44,7 @@ export default function Room() {
       setMessage('');
    };
 
-   if (!userName) redirect('/register');
+   if (!userName) redirect('/login');
 
    return (
       <div className="max-w-lg mx-auto p-6 bg-white rounded-lg shadow-md">
