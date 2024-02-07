@@ -10,12 +10,11 @@ export default function Room() {
    const pathName = usePathname();
    const roomName = pathName?.slice(1, pathName.length);
    const [message, setMessage] = useState('');
-   const [allMessages, setAllMessages] = useState<{ userName: string, message: string }[]>([]);
+   const [allMessages, setAllMessages] = useState<{ userName: string; message: string }[]>([]);
    const { userName } = useUserStorage();
 
    useEffect(() => {
       const socket = io();
-
 
       const socketInitializer = async () => {
          await fetch('/api/socket');
@@ -33,7 +32,7 @@ export default function Room() {
       };
    }, [roomName]);
 
-   const handleSubmit = (e:FormEvent<HTMLFormElement>) => {
+   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
       e.preventDefault();
       const socket = io();
 
@@ -45,11 +44,13 @@ export default function Room() {
       setMessage('');
    };
 
-   if(!userName) redirect('/register');
+   if (!userName) redirect('/register');
 
    return (
       <div className="max-w-lg mx-auto p-6 bg-white rounded-lg shadow-md">
-         <h1 className="text-2xl font-semibold mb-6">{userName}, Você está na sala {roomName}</h1>
+         <h1 className="text-2xl font-semibold mb-6">
+            {userName}, Você está na sala {roomName}
+         </h1>
          <div className="max-h-80 overflow-y-auto mb-4">
             {allMessages.map(({ userName, message }, index) => (
                <div key={index} className="mb-2">

@@ -17,7 +17,6 @@ export default function Chat() {
    };
 
    const handleRoomSelect = (roomName: string) => {
-      console.log('roomName', roomName);
       router.push(`/${roomName}`);
    };
 
