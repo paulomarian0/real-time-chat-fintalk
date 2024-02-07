@@ -6,7 +6,7 @@ import { useUserStorage } from '@/storages/useUser';
 export default function Chat() {
    const router = useRouter();
    const [newRoomName, setNewRoomName] = useState('');
-   const [rooms, setRooms] = useState(['default', 'room1', 'room2']);
+   const [rooms, setRooms] = useState(['Sala-1']); // Apenas uma sala chamada 'Sala 1'
    const { userName } = useUserStorage();
 
    const handleCreateRoom = () => {
@@ -29,7 +29,7 @@ export default function Chat() {
             <input
                className="flex-1 py-2 px-4 border border-gray-300 rounded-md mr-2 focus:outline-none"
                value={userName}
-               placeholder="Enter your username"
+               placeholder="Entre com seu nome"
             />
          </div>
          <div className="flex mb-4">
@@ -37,13 +37,13 @@ export default function Chat() {
                className="flex-1 py-2 px-4 border border-gray-300 rounded-md mr-2 focus:outline-none"
                value={newRoomName}
                onChange={(e) => setNewRoomName(e.target.value)}
-               placeholder="Enter new room name"
+               placeholder="Entre com o nome da sala nova"
             />
             <button
                className="py-2 px-6 bg-blue-500 text-white rounded-md hover:bg-blue-600 focus:outline-none"
                onClick={handleCreateRoom}
             >
-                                                  Create Room
+               Criar Sala
             </button>
          </div>
          <div>

@@ -17,10 +17,10 @@ export default function Register() {
    return (
       <div className="max-w-lg mx-auto p-6 bg-white rounded-lg shadow-md">
          <form onSubmit={handleSubmit}>
-            <h1 className="text-2xl font-semibold mb-6">Register</h1>
+            <h1 className="text-2xl font-semibold mb-6">Entre sem cadastro:</h1>
             <div className="mb-4">
                <label htmlFor="username" className="block text-sm font-medium text-gray-700">
-                                                            Username:
+                                                            Nome:
                </label>
                <input
                   onChange={(e) => setName(e.target.value)}
