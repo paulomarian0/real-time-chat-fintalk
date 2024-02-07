@@ -2,8 +2,11 @@
 import { FormEvent, useState } from 'react';
 import { useUserStorage } from '@/storages/useUser';
 import Link from 'next/link';
+import { toast } from 'sonner';
+import { useRouter } from 'next/navigation';
 
 export default function Register() {
+   const router = useRouter();
    const [username, setUsername] = useState('');
    const [password, setPassword] = useState('');
    const { setUserName } = useUserStorage();
@@ -19,6 +22,9 @@ export default function Register() {
          },
          body: JSON.stringify({ name: username, password }),
       });
+
+      toast.success('Usuário criado com sucesso');
+      router.push('/login');
    };
 
    return (

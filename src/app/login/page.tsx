@@ -1,9 +1,10 @@
 'use client';
 
-import { useRouter } from 'next/navigation';
-import { FormEvent, useState } from 'react';
 import { useUserStorage } from '@/storages/useUser';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
+import { FormEvent, useState } from 'react';
+import { toast } from 'sonner';
 
 export default function Login() {
    const router = useRouter();
@@ -11,28 +12,25 @@ export default function Login() {
    const [password, setPassword] = useState('');
    const { setUserName } = useUserStorage();
 
-   const handleSubmit = async(e: FormEvent<HTMLFormElement>) => {
+   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
       e.preventDefault();
 
       try {
-         try {
-            const response = await fetch('/api/login', {
-               method: 'POST',
-               headers: {
-                  'Content-Type': 'application/json',
-               },
-               body: JSON.stringify({ name: username, password }),
-            });
+         const response = await fetch('/api/login', {
+            method: 'POST',
+            headers: {
+               'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ name: username, password }),
+         });
 
-            if(response.ok) {
-               setUserName(username);
-               router.push('/chat');
-            }
-         } catch (error) {
-            console.log(error);
+         if (response.ok) {
+            setUserName(username);
+            return router.push('/chat');
          }
-      } catch (e) {
-         console.log(e);
+         toast.error('Usuário ou senha incorretos');
+      } catch (error) {
+         console.error(error);
       }
    };
 
@@ -70,7 +68,7 @@ export default function Login() {
             >
                                                   Login
             </button>
-            <div className='flex gap-4 py-4'>
+            <div className="flex gap-4 py-4">
                <Link
                   href={{ pathname: '/register-anonymously' }}
                   className="text-center w-full py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-gray-700 bg-gray-200 hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
@@ -79,7 +77,7 @@ export default function Login() {
                </Link>
 
                <Link
-                  href={{ pathname: '/chat' }}
+                  href={{ pathname: '/register' }}
                   className="text-center w-full py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-400 hover:bg-blue-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
                >
                                                             Create Account
