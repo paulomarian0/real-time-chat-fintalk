@@ -40,7 +40,7 @@ export default function Login() {
             <h1 className="text-2xl font-semibold mb-6">Login</h1>
             <div className="mb-4">
                <label htmlFor="username" className="block text-sm font-medium text-gray-700 mb-1">
-                                                            Username:
+                                                            Nome:
                </label>
                <input
                   onChange={(e) => setUsername(e.target.value)}
@@ -52,7 +52,7 @@ export default function Login() {
             </div>
             <div className="mb-4">
                <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-1">
-                                                            Password:
+                                                            Senha:
                </label>
                <input
                   onChange={(e) => setPassword(e.target.value)}
@@ -71,16 +71,16 @@ export default function Login() {
             <div className="flex gap-4 py-4">
                <Link
                   href={{ pathname: '/register-anonymously' }}
-                  className="text-center w-full py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-gray-700 bg-gray-200 hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
+                  className="text-center  w-full py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-gray-700 bg-gray-200 hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
                >
-                                                            Enter Anonymously
+                                                            Entrar anonimamente
                </Link>
 
                <Link
                   href={{ pathname: '/register' }}
-                  className="text-center w-full py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-400 hover:bg-blue-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
+                  className="text-center flex justify-center items-center w-full py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-400 hover:bg-blue-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
                >
-                                                            Create Account
+                                                             Criar uma conta
                </Link>
             </div>
          </form>

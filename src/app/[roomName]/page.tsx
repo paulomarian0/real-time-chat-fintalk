@@ -60,7 +60,7 @@ export default function Room() {
    return (
       <div className="max-w-lg mx-auto p-6 bg-white rounded-lg shadow-md">
          <h1 className="text-2xl font-semibold mb-6">
-            <span className="capitalize">{userName}</span>, você está na <span className="text-blue-600">{roomName}</span>
+            <span className="capitalize">{userName}</span>, você está na <span className="text-blue-600">{roomName}</span>, escreva alguma coisa.
          </h1>
          <div id="message-container" className="max-h-80 overflow-y-auto mb-4 scroll-smooth">
             {allMessages.map((item, index) => (

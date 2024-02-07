@@ -24,14 +24,7 @@ export default function Chat() {
 
    return (
       <div className="max-w-lg mx-auto p-6 bg-white rounded-lg shadow-md">
-         <h1 className="text-2xl font-semibold mb-6">Chat App</h1>
-         <div className="flex items-center mb-4">
-            <input
-               className="flex-1 py-2 px-4 border border-gray-300 rounded-md mr-2 focus:outline-none"
-               value={userName}
-               placeholder="Entre com seu nome"
-            />
-         </div>
+         <h1 className="text-2xl font-semibold mb-6"><span className='capitalize'>{userName}</span>, selecione a sala ou crie uma nova</h1>
          <div className="flex mb-4">
             <input
                className="flex-1 py-2 px-4 border border-gray-300 rounded-md mr-2 focus:outline-none"

@@ -2,7 +2,8 @@ import Login from './login/page';
 
 export default function Home() {
    return (
-      <div>
+      <div >
+
          <Login />
       </div>
    );
