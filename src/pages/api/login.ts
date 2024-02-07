@@ -2,16 +2,12 @@ import { NextApiRequest, NextApiResponse } from 'next';
 import { PrismaClient } from '@prisma/client';
 import jwt from 'jsonwebtoken';
 
-export default async function handler(req: NextApiRequest, res:NextApiResponse) {
+export default async function handler(req: NextApiRequest, res: NextApiResponse) {
    const { name, password } = req.body;
 
    const token = await loginUser(name, password);
-   console.log('Token JWT gerado:', token);
 
-   const userIdFromToken = await verifyToken(token);
-   console.log('ID do usuário extraído do token:', userIdFromToken);
-
-   return res.json({  token });
+   return res.json({ token });
 }
 
 async function loginUser(name: string, password: string) {
@@ -31,11 +27,3 @@ async function loginUser(name: string, password: string) {
    return token;
 }
 
-async function verifyToken(token: string) {
-   try {
-      const decoded = jwt.verify(token, 'suaChaveSecreta');
-      return decoded.userId as string;
-   } catch (error) {
-      throw new Error('Token inválido');
-   }
-}
